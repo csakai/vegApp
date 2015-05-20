@@ -4,6 +4,8 @@ var express = require("express");
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
+var expressJwt = require('express-jwt');
+var secret = config.JWT_SECRET;
 
 mongoose.connect('mongodb://localhost/vegApp');
 mongoose.connection.once('open', function(){
@@ -22,5 +24,11 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 app.use(express.static(path.join(root, 'client')));
 app.set('appPath', 'client');
-
+app.use('/auth', require('./auth'));
+app.use('/api', function (req, res, next) {
+  console.log('req', req.query, req.params, req.body);
+  next();
+});
+app.use('/api', expressJwt({secret: secret}));
+app.use('/api/users', require('./api/users'));
 app.listen(9000);
