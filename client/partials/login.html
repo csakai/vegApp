@@ -6,10 +6,10 @@
 <h3>Login</h3>
 <p>Log in to start the party!</p>
 
-<input type="email" name="email" placeholder="email" autofocus
-ng-model="user.email" ng-required="true">
-<p class="error" ng-show="myForm.email.$invalid && myform.email.$touched">
-Must use a valid email address.</p>
+<input type="text" name="username" placeholder="username" autofocus
+ng-model="user.username" ng-required="true">
+<p class="error" ng-show="myForm.username.$invalid && myform.username.$touched">
+Must enter a username.</p>
 
 <input type="password" name="password" placeholder="password" ng-model="user.password" ng-required="true">
 
